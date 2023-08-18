@@ -19,10 +19,7 @@ export default function LandingPage() {
         <div>
             <h1>LANDING PAGE</h1>
             <Login />
-            <button className="button" onClick={createAccountShow()}>Create Account</button>
-           <div id='newUserElemet' style={{backgroundColor: "lightblue", visibility:"visible"}}>
-            <NewUser />
-           </div>      
+            <NewUser />   
         </div>
     )
 }
