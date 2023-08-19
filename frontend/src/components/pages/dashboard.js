@@ -7,9 +7,10 @@ export default function DashBoard({isAuthenticated}) {
 
     return(
         <div>
-            <h1>Welcome back ${username}</h1>
+            
+            <h1>Welcome back </h1>
             <MeasuresDropdown />
             <UnitsConverter />
         </div>
     )
-}a
+}

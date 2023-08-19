@@ -6,6 +6,7 @@ import Login from './components/utils/login';
 import Register from './components/utils/register';
 import React, { useState } from 'react';
 import DashBoard from './components/pages/dashboard'
+import Header from './components/utils/header';
 
 
 function App() {
@@ -15,9 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-    
-      </header>
+        <Header />
       <Routes>
         <Route path="/" render={props => <LandingPage {...props}/>} element={<LandingPage />}/>
         <Route exact path="/login" 
