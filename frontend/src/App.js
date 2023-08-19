@@ -18,7 +18,7 @@ function App() {
     <div className="App">
         <Header />
       <Routes>
-        <Route path="/" render={props => <LandingPage {...props}/>} element={<LandingPage />}/>
+        <Route path="/home" render={props => <LandingPage {...props}/>} element={<LandingPage />}/>
         <Route exact path="/login" 
           render={props => 
             !isAuthenticated ? (

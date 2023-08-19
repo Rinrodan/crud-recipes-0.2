@@ -29,6 +29,7 @@ export default function Login(isAuthenticated) {
             if ('data' in content) {
               //it worked
               handleSuccessfulLogin(content.data);
+              isAuthenticated = true;
               Navigate('/dashboard');
             }
           })

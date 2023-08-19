@@ -80,19 +80,27 @@ app.post('/users', async (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body
+
   let userCheck = await knex('users')
         .select('id', 'username', 'password')
         .where('username', username)
         .first()
+  
   if (userCheck) {
     //validate the password using bcrypt
     let submittedPass = req.body.password; //plain text from browser
     let savedPass = userCheck.password; //that has been hashed
     //TODO: use bcrypt.compare() to actually hash and compare the password
     const passwordDidMatch = await bcrypt.compare(password, userCheck.password);
+   
     if (passwordDidMatch) {
-      res.status(200).send({ data: { token: 'this is a pretend token' } });
-      console.log()
+      let userData = await knex('users')
+        .select("*")
+        .where('username', username)
+        .first()
+        delete(password)
+      res.status(200).send({data: {userData} || { token: 'this is a pretend token' } });
+      console.log(userData)
     } else {
       res.status(401).send({
         error: { code: 401, message: 'invalid username or password.' },
