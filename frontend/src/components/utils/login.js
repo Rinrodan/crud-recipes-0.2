@@ -1,13 +1,14 @@
 import { useState} from "react";
 import Cookies from 'js-cookie'
+import { Routes, Route, useNavigate} from 'react-router-dom'
 
-const SignIn = ({ setIsSignInModal }) => {
+export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [authFail, setAuthFail] = useState(false);
     const Navigate = useNavigate();
     
-    const handleSignIn = (event) => {
+    const handleLogin = (event) => {
         event.preventDefault();
         fetch('http://localhost:8080/login', {
           method: "POST",
@@ -23,7 +24,7 @@ const SignIn = ({ setIsSignInModal }) => {
             if (data.token) {
               let inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
               Cookies.set('token', data.token, {expires: inFifteenMinutes})
-              Navigate(`/user/${data.user_name}`)
+              Navigate(`/user/${data.username}`)
             } else {
               setAuthFail(true)
             }
@@ -40,7 +41,7 @@ const SignIn = ({ setIsSignInModal }) => {
                     type="text"
                     required
                     placeholder="User Name"
-                    onChange={(event) => setUserName(event.target.value)} >
+                    onChange={(event) => setUsername(event.target.value)} >
                 </input>
                 <label htmlFor="loginPassword" value="password" />
                 <input 

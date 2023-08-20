@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
 import LandingPage from './components/pages/landingPage';
 
