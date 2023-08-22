@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-export default function NewUser() {
+export default function Register({isAuthenticated}) {
 
 const [passCheck, setPassCheck] = useState(false);
 const [verifyPassword, setVerifyPassword] = useState('');
@@ -10,11 +10,6 @@ const [lname, setLname] = useState('');
 const [username, setUsername] = useState('');
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
-
-console.log(fname);
-console.log(password);
-console.log(passCheck);
-
 
 
 // const passwordChecker = () => password === verifyPassword ? setPassCheck(true) : null;
@@ -25,16 +20,17 @@ const  onSubmitForm = async(event) =>{
             const newUser = {fname, lname, username, email, password};
             if(password === verifyPassword){
                 await fetch(`http://localhost:8080/users`, {
-                  method: "POST",
-                  headers: {
+                    method: "POST",
+                    headers: {
                     "content-type": "application/json"
-                  },
-                  body: JSON.stringify(newUser)
+                    },
+                    body: JSON.stringify(newUser)
                 })
-                .then(res => res.json())
+                const parseRes = await res.json();
                 
     
-                console.log(passCheck);
+         
+                console.log(newUser)
                 alert("Registration Successful!!!!")
             } else{
                 alert("passwords must match")
@@ -48,7 +44,8 @@ const  onSubmitForm = async(event) =>{
 
 return (
     <div>
-         {passCheck && <p className="text-center text-red-500">Passwords Must Match</p>}
+        <h1>Register</h1>
+        {passCheck && <p className="text-center text-red-500">Passwords Must Match</p>}
             <form onSubmit={onSubmitForm}>
                 <label htmlFor="fname" value="fname" />
                 <input 

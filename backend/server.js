@@ -9,6 +9,8 @@ const port = 8080;
 
 app.use(express.json())
 app.use(cors())
+// app.use("/authentication", require("./routes/jwtAuth"));
+app.use("/dashboard", require("./routes/dashboard"));
 
 // const JWT_SECRET = "secretSECRETsecret"
 
@@ -64,10 +66,10 @@ app.post('/users', async (req, res) => {
 
     console.log('user response: ', addedUserResponse)
 
-    delete addedUserResponse.password
-    // addedUserResponse = addedUserResponse.map((e) => {
-    //   delete e.password
-    // })
+
+    addedUserResponse = addedUserResponse.map((e) => {
+      delete e.password
+    })
     res.status(201).json(addedUserResponse)
   } catch (err) {
     res.status(500).json(err.message)
