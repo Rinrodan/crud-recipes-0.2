@@ -7,9 +7,11 @@ import Register from './components/utils/register';
 import React, { useState } from 'react';
 import DashBoard from './components/pages/dashboard'
 
+
 function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userData, setUserdata] = useState({});
 
   return (
     <div className="App">
@@ -39,7 +41,9 @@ function App() {
           element={<Register />}
         />
         <Route 
-        path="/dashboard" element={<DashBoard />}/>
+        path="/dashboard" 
+        render={props => <DashBoard {...props}/>} 
+        element={<DashBoard />}/>
         
       </Routes>
     </div>

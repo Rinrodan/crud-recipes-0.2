@@ -6,6 +6,7 @@ export default function Login(isAuthenticated) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [authFail, setAuthFail] = useState(false);
+    const [tokenStatus, setTokenStatus] = useState('');
     const Navigate = useNavigate();
     
     const handleLogin = (event) => {
@@ -18,18 +19,34 @@ export default function Login(isAuthenticated) {
             password: password
           })
         })
-          .then(res => res.json()
-          )
-          .then(data => {
-            if (data.token) {
-              let inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
-              Cookies.set('token', data.token, {expires: inFifteenMinutes})
-              Navigate(`/user/${data.username}`)
-            } else {
-              setAuthFail(true)
+          .then(res => res.json())
+          .then((content) => {
+            //we have a response
+            if ('error' in content) {
+              //bad attempt
+              failure(content.error);
+            }
+            if ('data' in content) {
+              //it worked
+              handleSuccessfulLogin(content.data);
+              Navigate('/dashboard');
             }
           })
+          .catch(failure);
       }
+
+      function handleSuccessfulLogin(data) {
+        //we have a token so put it in localstorage
+        console.log('token', data.token);
+        sessionStorage.setItem('myapp-token', data.token);
+        console.log("Login successful!", data);
+        alert('You are logged in');
+      }
+      function failure(err) {
+        alert(err.message);
+        console.warn(err.code, err.message);
+      }
+
     return(
         <div>
             <h1>Login</h1>

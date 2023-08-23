@@ -1,12 +1,15 @@
-import React from "react";
-import MeasuresDropdown from "../utils/measuresDropDown";
+import React, { useContext } from "react";
+import MeasuresDropdown from "../utils/unitsConversion/unitsConverter";
+import UnitsConverter from "../utils/unitsConversion/unitsConverter";
+
 
 export default function DashBoard({isAuthenticated}) {
 
     return(
         <div>
-            <h1>DASHBOARD</h1>
+            <h1>Welcome back ${username}</h1>
             <MeasuresDropdown />
+            <UnitsConverter />
         </div>
     )
-}
+}a

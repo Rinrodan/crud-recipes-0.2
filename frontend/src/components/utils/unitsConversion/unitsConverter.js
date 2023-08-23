@@ -2,18 +2,18 @@
 
 
 export default function UnitsConverter() {
-const measuresTable = ['Punds (lbs)', 'Ounces (oz)', 'Cup', 'Table Spoon (tbs)', 'Tea Spoon (tps)',   ]
+    const measuresTable = [{name: "Pounds (lbs)"}, {name: "Ounces (oz)", toLb: 16}, {name: "Cup"}, {name:  "Table Spoon (tbs)"}, {name: "Tea Spoon (tps)"} ];
 
 
 
-const 
+
     return(
         <div>
-                <ul>
-            { const measuresTableDropdown = measuresTable.map((i) => ) {
-                    
-
-            }}
+            <select>
+                <input type="number"></input>
+            { measuresTable.map((measure) =>  
+            <option key={measure.name}>{measure.name}</option>)}
+            </select>
         </div>
     )
 }
